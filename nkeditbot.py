@@ -17,7 +17,7 @@ def handle_message(update, context):
     if update.message.text == '/edit_hashtags':
         edit_hashtags(update, context)
 
-message_handler = MessageHandler(Filters.text, handle_message)
+message_handler = MessageHandler(filters.text, handle_message)
 dispatcher.add_handler(message_handler)
 
 
