@@ -1,12 +1,14 @@
 import telegram
-from telegram.ext import Updater, CommandHandler, MessageHandler, filters
+import asyncio
+from telegram.ext import Updater, CommandHandler, MessageHandler, filters, JobQueue
 
-bot = telegram.Bot("5811307345:AAGtbmrYWbf3lkyZonrr1ZH83e9w7tm9dG8")
-updater = Updater(bot=bot, update_queue=5)
-
-def main():
-    updater.start_polling(poll_interval=0.0, timeout=10, bootstrap_retries=-1, read_timeout=2, write_timeout=None, connect_timeout=None, pool_timeout=None, allowed_updates=None, drop_pending_updates=None, error_callback=None)
-main()
+async def main():
+    
+    update_queue = JobQueue()
+    bot = telegram.Bot("token here")
+    updater = Updater(bot=bot, update_queue=update_queue)
+    await updater.start_polling(poll_interval=0.0, timeout=10, bootstrap_retries=-1, read_timeout=2, write_timeout=None, connect_timeout=None, pool_timeout=None, allowed_updates=None, drop_pending_updates=None, error_callback=None)
+    main()
 
 def start(update, context):
     update.message.reply_text("Bot started.")
