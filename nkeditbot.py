@@ -5,8 +5,9 @@ import telegram
 
 update_queue = JobQueue()
 bot = telegram.Bot("tokengoeshere")
-updater = Updater(bot=bot, update_queue=update_queue)
-Updater.start_polling()
+updater = Updater(bot=bot, update_queue=update_queue) #Make sure to replace bot and update_queue with the appropriate values for the bot.
+# Start the bot
+Updater.start_polling(timeout=10, clean=True)
 
 def edit_hashtags(update, context):
     bot = context.bot
@@ -14,8 +15,8 @@ def edit_hashtags(update, context):
     chat_id = message.chat_id
 
 def handle_message(update, context):
-    if update.message.text == '/edit_hashtags':
-        edit_hashtags(update, context)
+if update.message.text == '/edit_hashtags':
+    edit_hashtags(update, context)
 
 message_handler = MessageHandler(filters.text, handle_message)
 dispatcher.add_handler(message_handler)
